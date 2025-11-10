@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+
+  <link rel="stylesheet" href="/styles/login.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;900&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <div class="container" id="container">
+    <!-- CADASTRO -->
+    <div class="criar">
+      <form id="formCadastro">
+        <h1>Criar Conta</h1>
+        <input type="text" name="nome" id="nome" placeholder="Nome" required />
+        <input type="date" name="nascimento" id="nascimento" required />
+        <input type="email" name="email" id="emailCadastro" placeholder="Email" required />
+        <input type="tel" name="telefone" id="telefone" placeholder="Telefone" maxlength="15" required />
+        <select name="genero" id="genero" required>
+          <option value="">Selecione o gênero</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <input type="password" name="senha" id="senhaCadastro" placeholder="Senha" required />
+
+        <div class="termos-container">
+          <input type="checkbox" id="termos" required />
+          <label for="termos">
+            Li e aceito os <a href="#" id="abrir-termos">Termos de Uso</a>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-cadastrar">Cadastrar</button>
+      </form>
+
+      <!-- Pop-up Termos -->
+      <div id="popup-termos" class="popup-termos">
+        <div class="popup-conteudo">
+          <div class="popup-texto">Este documento estabelece os termos e condições que regem o acesso e a utilização dos serviços oferecidos por este website. Ao navegar, acessar ou utilizar este site, você declara estar ciente e de acordo com todas as disposições aqui contidas, comprometendo-se a respeitar integralmente as normas estabelecidas. O conteúdo disponibilizado neste ambiente digital é protegido por direitos autorais, propriedade intelectual e demais legislações aplicáveis, sendo de uso exclusivo e pessoal dos usuários. A reprodução, distribuição, modificação, publicação ou qualquer forma de utilização parcial ou total do material sem autorização expressa é proibida e poderá implicar em medidas legais cabíveis. Embora se empenhe em manter as informações atualizadas, completas e corretas, este website não garante a precisão, confiabilidade ou adequação dos conteúdos para quaisquer finalidades específicas. Portanto, o uso das informações fornecidas é de inteira responsabilidade do usuário, que deve exercer seu discernimento antes de tomar decisões baseadas nelas. Este site não se responsabiliza por eventuais danos diretos, indiretos, incidentais ou consequenciais decorrentes do uso, mau uso ou incapacidade de uso dos serviços e conteúdos aqui disponibilizados. Reservamo-nos o direito de alterar, suspender ou interromper, temporária ou permanentemente, qualquer serviço ou funcionalidade sem aviso prévio, bem como modificar estes Termos de Uso a qualquer momento, conforme a necessidade e evolução legal. Recomendamos que o usuário consulte periodicamente este documento para manter-se informado sobre eventuais atualizações. Os dados pessoais eventualmente coletados durante a navegação são tratados com confidencialidade e em conformidade com a legislação vigente sobre proteção de dados, respeitando a privacidade dos usuários. O uso continuado do site implica na aceitação irrevogável destes termos e condições, configurando vínculo legal entre o usuário e os responsáveis pela plataforma. Caso o usuário não concorde com quaisquer disposições aqui apresentadas, deve abster-se de utilizar os serviços disponibilizados. O foro competente para dirimir eventuais controvérsias relacionadas a estes Termos de Uso será o da comarca em que se localiza a sede do website, com exclusão de qualquer outro, por mais privilegiado que seja. É imprescindível que o usuário faça uso responsável, ético e legal das funcionalidades oferecidas, respeitando direitos de terceiros, normas de convivência e boas práticas digitais. Este documento reflete o compromisso com a transparência e a segurança jurídica, promovendo uma experiência confiável e respeitosa para todos os visitantes e usuários.
+          </div>
+          <button id="fechar-termos">Ok</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="login">
+      <form id="formLogin">
+        <h1>Login</h1>
+        <input type="email" id="email" name="email" placeholder="Email" required />
+        <input type="password" id="senha" name="senha" placeholder="Senha" required />
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+
+    <div class="toogle-container">
+      <div class="toogle">
+        <div class="toogle-panel toogle-left">
+          <h1>Bem-vindo!</h1>
+          <p>Se você já tem uma conta...</p>
+          <button class="hidden" id="login">Clique aqui</button>
+        </div>
+        <div class="toogle-panel toogle-right">
+          <h1>Olá, usuário!</h1>
+          <p>Se você não tem uma conta...</p>
+          <button class="hidden" id="register">Clique aqui</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const formCadastro = document.getElementById('formCadastro');
+    const telefoneInput = document.querySelector('input[name="telefone"]');
+
+    // Máscara de telefone
+    telefoneInput.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 11) value = value.slice(0, 11);
+      if (value.length > 6) {
+        e.target.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+      } else if (value.length > 2) {
+        e.target.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+      } else if (value.length > 0) {
+        e.target.value = `(${value}`;
+      } else {
+        e.target.value = '';
+      }
+    });
+
+    // Pop-up termos
+    document.getElementById("abrir-termos").addEventListener("click", (e) => {
+      e.preventDefault();
+      document.getElementById("popup-termos").style.display = "flex";
+    });
+    document.getElementById("fechar-termos").addEventListener("click", () => {
+      document.getElementById("popup-termos").style.display = "none";
+    });
+
+    // Cadastro
+    formCadastro.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      telefoneInput.value = telefoneInput.value.replace(/\D/g, '');
+      const formData = new FormData(formCadastro);
+      const dados = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/usuarios/cadastrar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados),
+          credentials: 'include'
+        });
+
+        const data = await response.json();
+        if (data.sucesso) {
+          alert('✅ Cadastro realizado com sucesso!');
+          window.location.href = data.redirectTo || '/';
+        } else {
+          alert('❌ Erro ao cadastrar: ' + (data.erro || 'Tente novamente.'));
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+        alert('Ocorreu um erro no cadastro.');
+      }
+    });
+
+    // Alternar entre login/cadastro
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("container");
+      const registerBtn = document.getElementById("register");
+      const loginBtn = document.getElementById("login");
+      registerBtn.addEventListener("click", () => container.classList.add("active"));
+      loginBtn.addEventListener("click", () => container.classList.remove("active"));
+    });
+
+    // Login
+    const formLogin = document.getElementById('formLogin');
+    formLogin.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+
+      if (!email || !senha) return alert('⚠️ Preencha todos os campos.');
+
+      try {
+        const res = await fetch('/usuarios/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, senha }),
+          credentials: 'include'
+        });
+
+        const data = await res.json();
+        if (data.sucesso) {
+          alert('✅ Login realizado com sucesso!');
+          window.location.href = data.redirectTo || '/';
+        } else {
+          alert('❌ Erro: ' + (data.erro || 'Verifique suas credenciais.'));
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Erro no login.');
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("container");
+  const registerBtn = document.getElementById("register");
+  const loginBtn = document.getElementById("login");
+
+  // Alternar entre telas de login e cadastro
+  registerBtn.addEventListener("click", () => {
+    container.classList.add("active");
+  });
+
+  loginBtn.addEventListener("click", () => {
+    container.classList.remove("active");
+  });
+
+  // ✅ Detectar parâmetro na URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const modo = urlParams.get("modo");
+
+  if (modo === "cadastro") {
+    container.classList.add("active");
+  } else {
+    container.classList.remove("active");
+  }
+});
+
+  </script>
+</body>
+</html>

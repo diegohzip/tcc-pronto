@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Training</title>
+  <link rel="stylesheet" href="/styles/index.css" />
+  <link rel="stylesheet" href="/styles/padrao.css" />
+</head>
+<body>
+<%- include('partials/header', { usuario }) %>
+
+  <main>
+    <!-- Banner principal -->
+    <section class="hero">
+      <div class="texto-banner">
+        <h2>Monte sua ficha de treino personalizada!</h2>
+        <p>Responda nosso questionário e receba sua ficha completa agora mesmo, feita com base nas suas metas e realidade.</p>
+      </div>
+      <a href="/questionario" class="cta-button">Fazer Questionário</a>
+    </section>
+
+    <!-- Benefícios com carrossel -->
+    <section class="benefits-carousel">
+      <div class="carousel-container">
+        <div class="carousel-card">✅ Fichas de treino totalmente personalizadas</div>
+        <div class="carousel-card">✅ Cada exercício acompanha vídeo tutorial explicativo e objetivo</div>
+        <div class="carousel-card">✅ Plataforma gratuita, 100% online e de fácil acesso</div>
+        <div class="carousel-card">✅ Ideal para iniciantes e avançados, com foco nos seus objetivos</div>
+      </div>
+    </section>
+
+
+    <!-- Comunidade WhatsApp -->
+    <section class="community">
+      <h3>Entre para nossa comunidade!</h3>
+      <p>Participe do grupo no WhatsApp para tirar dúvidas, trocar experiências e evoluir junto!</p>
+      <a href="https://chat.whatsapp.com/Fr86eCknN2t1XFRHKUMueK" target="_blank" class="cta-button">Entrar na Comunidade</a>
+    </section>
+  </main>
+
+
+
+  <!-- Pop-up Termos de Uso -->
+  <div id="popup-termos" class="popup-termos" style="display: none;">
+    <div class="popup-termos-conteudo">
+      <span id="fechar-termos" class="fechar-popup">&times;</span>
+      <h2>Termos de Uso</h2>
+      <p>Ao utilizar este site, você concorda com os seguintes termos e condições:</p>
+      <div class="popup-texto">Este documento estabelece os termos e condições que regem o acesso e a utilização dos serviços oferecidos por este website. Ao navegar, acessar ou utilizar este site, você declara estar ciente e de acordo com todas as disposições aqui contidas, comprometendo-se a respeitar integralmente as normas estabelecidas. O conteúdo disponibilizado neste ambiente digital é protegido por direitos autorais, propriedade intelectual e demais legislações aplicáveis, sendo de uso exclusivo e pessoal dos usuários. A reprodução, distribuição, modificação, publicação ou qualquer forma de utilização parcial ou total do material sem autorização expressa é proibida e poderá implicar em medidas legais cabíveis. Embora se empenhe em manter as informações atualizadas, completas e corretas, este website não garante a precisão, confiabilidade ou adequação dos conteúdos para quaisquer finalidades específicas. Portanto, o uso das informações fornecidas é de inteira responsabilidade do usuário, que deve exercer seu discernimento antes de tomar decisões baseadas nelas. Este site não se responsabiliza por eventuais danos diretos, indiretos, incidentais ou consequenciais decorrentes do uso, mau uso ou incapacidade de uso dos serviços e conteúdos aqui disponibilizados. Reservamo-nos o direito de alterar, suspender ou interromper, temporária ou permanentemente, qualquer serviço ou funcionalidade sem aviso prévio, bem como modificar estes Termos de Uso a qualquer momento, conforme a necessidade e evolução legal. Recomendamos que o usuário consulte periodicamente este documento para manter-se informado sobre eventuais atualizações. Os dados pessoais eventualmente coletados durante a navegação são tratados com confidencialidade e em conformidade com a legislação vigente sobre proteção de dados, respeitando a privacidade dos usuários. O uso continuado do site implica na aceitação irrevogável destes termos e condições, configurando vínculo legal entre o usuário e os responsáveis pela plataforma. Caso o usuário não concorde com quaisquer disposições aqui apresentadas, deve abster-se de utilizar os serviços disponibilizados. O foro competente para dirimir eventuais controvérsias relacionadas a estes Termos de Uso será o da comarca em que se localiza a sede do website, com exclusão de qualquer outro, por mais privilegiado que seja. É imprescindível que o usuário faça uso responsável, ético e legal das funcionalidades oferecidas, respeitando direitos de terceiros, normas de convivência e boas práticas digitais. Este documento reflete o compromisso com a transparência e a segurança jurídica, promovendo uma experiência confiável e respeitosa para todos os visitantes e usuários.</div>
+      <button id="botao-ok-termos">Ok</button>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+  <script src="/js/index.js"></script>
+</body>
+</html>

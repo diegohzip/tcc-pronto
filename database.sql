@@ -1,0 +1,14 @@
+CREATE DATABASE tcc;
+
+use tcc;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  nascimento DATE NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  telefone VARCHAR(20) NOT NULL UNIQUE,
+  genero ENUM('masculino', 'feminino', 'outro') NOT NULL,
+  senha VARCHAR(255) NOT NULL
+  );
+

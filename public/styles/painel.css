@@ -1,0 +1,61 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 2rem;
+}
+
+.painel h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: #a82d2d;
+  color: white;
+}
+
+button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.visualizar { background-color: #1f4037; color: white; }
+button.editar     { background-color: #f1c40f; color: white; }
+button.deletar    { background-color: #e74c3c; color: white; }
+
+.painel-header {
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+
+.botoes-header a {
+  padding: 8px 15px;
+  background-color: #a82d2d;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.botoes-header a:hover {
+  background-color: #581c15;
+}

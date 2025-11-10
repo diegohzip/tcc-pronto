@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Admin</title>
+  <link rel="stylesheet" href="/styles/painel.css" />
+  <style>
+    .pesquisa-container {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .pesquisa-container input {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 250px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-conteudo {
+      background: #fff;
+      padding: 20px;
+      width: 350px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .modal-conteudo h2 { margin-top: 0; }
+    .fechar {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .modal-conteudo label { display: block; margin-top: 10px; font-weight: bold; }
+    .modal-conteudo input, .modal-conteudo select {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    .modal-conteudo button {
+      margin-top: 15px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .botao-alterar { background-color: #d79b47; color: white; margin-right: 5px; }
+    .botao-salvar { background-color: #499049; color: white; }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <h1>Usuários Cadastrados</h1>
+
+    <div class="pesquisa-container">
+      <input type="text" id="pesquisaNome" placeholder="Pesquisar por nome...">
+    </div>
+
+    <table id="tabelaUsuarios">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalVisualizar" class="modal">
+    <div class="modal-conteudo">
+      <span class="fechar" onclick="fecharModal()">&times;</span>
+      <h2>Detalhes do Usuário</h2>
+
+      <input type="hidden" id="detalheId">
+
+      <label>Nome</label>
+      <input type="text" id="detalheNome" disabled>
+
+      <label>Email</label>
+      <input type="email" id="detalheEmail" disabled>
+
+      <label>Telefone</label>
+      <input type="text" id="detalheTelefone" disabled>
+
+      <label>Gênero</label>
+      <select id="detalheGenero" disabled>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+        <option value="outro">Outro</option>
+      </select>
+
+      <div style="text-align: right;">
+        <button class="botao-alterar" type="button" onclick="habilitarEdicao()">Alterar</button>
+        <button class="botao-salvar" type="button" onclick="salvarUsuario()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="painel-header">
+    <div class="botoes-header">
+      <a href="/" class="btn-voltar">Voltar ao Site</a>
+      <a href="/admin/logout" class="btn-logout">Logout</a>
+    </div>
+  </div>
+
+  <script src="/js/painel.js"></script>
+</body>
+</html>

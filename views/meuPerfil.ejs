@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil - Nexus Training</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #d00000;
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .botoes {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-salvar {
+      background-color: #d00000;
+      color: white;
+    }
+    .btn-salvar:hover {
+      background-color: #a00000;
+    }
+
+    .btn-voltar {
+      background-color: #ccc;
+      color: black;
+    }
+    .btn-voltar:hover {
+      background-color: #999;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Meu Perfil</h1>
+    <form id="formMeuPerfil">
+      <label for="nomeUsuario">Nome:</label>
+      <input type="text" id="nomeUsuario" name="nome" value="<%= usuario ? usuario.nome : '' %>" required>
+
+      <label for="emailUsuario">Email:</label>
+      <input type="email" id="emailUsuario" name="email" value="<%= usuario ? usuario.email : '' %>" required>
+
+      <label for="telefoneUsuario">Telefone:</label>
+      <input type="text" id="telefoneUsuario" name="telefone" value="<%= usuario ? usuario.telefone : '' %>">
+
+      <label for="generoUsuario">Gênero:</label>
+      <select id="generoUsuario" name="genero">
+        <option value="">Selecione</option>
+        <option value="masculino" <%= usuario && usuario.genero === 'masculino' ? 'selected' : '' %>>Masculino</option>
+        <option value="feminino" <%= usuario && usuario.genero === 'feminino' ? 'selected' : '' %>>Feminino</option>
+        <option value="outro" <%= usuario && usuario.genero === 'outro' ? 'selected' : '' %>>Outro</option>
+      </select>
+
+      <div class="botoes">
+        <button type="submit" class="btn-salvar">Salvar Alterações</button>
+        <a href="/" class="btn-voltar">Voltar</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("formMeuPerfil").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nome = document.getElementById("nomeUsuario").value.trim();
+      const email = document.getElementById("emailUsuario").value.trim();
+      const telefone = document.getElementById("telefoneUsuario").value.trim();
+      const genero = document.getElementById("generoUsuario").value;
+
+      if (!nome || !email) {
+        alert("Nome e email são obrigatórios.");
+        return;
+      }
+
+      try {
+        const response = await fetch('/usuario/atualizar', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, email, telefone, genero }),
+          credentials: 'same-origin'
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          alert("Perfil atualizado com sucesso!");
+          window.location.reload();
+        } else {
+          alert(result.erro || "Erro ao atualizar perfil.");
+        }
+      } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro na comunicação com o servidor.");
+      }
+    });
+  </script>
+</body>
+</html>
