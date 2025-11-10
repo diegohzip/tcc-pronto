@@ -5,15 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnEditar = document.getElementById("btnEditar");
   const btnSalvar = document.getElementById("btnSalvar");
   const formPerfil = document.getElementById("formPerfil");
+  const telefoneInput = document.getElementById("telefoneUsuario");
 
   if (!abrirPerfil || !popupPerfil) return;
 
-  // Abrir popup
+  // === Abrir popup ===
   abrirPerfil.addEventListener("click", () => {
     popupPerfil.style.display = "flex";
   });
 
-  // Fechar popup clicando no X ou fora do conteúdo
+  // === Fechar popup ===
   fecharPopup.addEventListener("click", () => {
     popupPerfil.style.display = "none";
   });
@@ -21,14 +22,41 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === popupPerfil) popupPerfil.style.display = "none";
   });
 
-  // Habilitar edição
+  // === Habilitar edição ===
   btnEditar.addEventListener("click", () => {
     document.querySelectorAll("#formPerfil input, #formPerfil select").forEach(el => el.disabled = false);
     btnEditar.style.display = "none";
     btnSalvar.style.display = "inline-block";
   });
 
-  // Salvar alterações
+  // === Aplicar máscara e limitar o telefone ===
+  if (telefoneInput) {
+    // Bloqueia caracteres não numéricos
+    telefoneInput.addEventListener("keypress", (e) => {
+      if (!/[0-9]/.test(e.key)) e.preventDefault();
+    });
+
+    // Formata e limita a 11 números
+    telefoneInput.addEventListener("input", (e) => {
+      let valor = e.target.value.replace(/\D/g, ""); // remove tudo que não for número
+
+      // limita a 11 dígitos
+      if (valor.length > 11) valor = valor.slice(0, 11);
+
+      // aplica a máscara
+      if (valor.length > 6) {
+        valor = valor.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, "($1) $2-$3");
+      } else if (valor.length > 2) {
+        valor = valor.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+      } else {
+        valor = valor.replace(/^(\d*)/, "($1");
+      }
+
+      e.target.value = valor;
+    });
+  }
+
+  // === Salvar alterações ===
   formPerfil.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -56,14 +84,11 @@ document.addEventListener("DOMContentLoaded", () => {
         credentials: "include"
       });
 
-      // Verifica se a resposta é OK e se o content-type é JSON
       if (!response.ok) {
-        // Tenta ler como texto para ver o erro do servidor
         const errorText = await response.text();
         throw new Error(`Erro HTTP ${response.status}: ${errorText}`);
       }
 
-      // Verifica se o content-type é JSON
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
         throw new Error("Resposta do servidor não é JSON válida.");
@@ -77,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btnSalvar.style.display = "none";
       popupPerfil.style.display = "none";
 
-      // Atualiza o texto do usuário no header (opcional)
+      // Atualiza o nome exibido no header
       const areaUsuario = document.getElementById("areaUsuario");
       if (areaUsuario && result.usuario && result.usuario.nome) {
         areaUsuario.querySelector("#abrirPerfil").textContent = `👤 ${result.usuario.nome}`;

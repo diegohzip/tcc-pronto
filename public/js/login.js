@@ -40,11 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.erro || "Erro no login.");
 
-      alert("✅ Login realizado com sucesso!");
-      window.location.href = data.redirectTo || "/"; // redireciona para última rota ou página inicial
+      alert("✅ " + data.sucesso);
+      window.location.href = data.redirectTo || "/";
     } catch (err) {
       console.error("Erro no login:", err);
       alert(err.message);
@@ -62,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const telefone = document.getElementById("telefone").value.trim();
     const genero = document.getElementById("genero").value;
     const senha = document.getElementById("senhaCadastro").value.trim();
-    const redirectTo = "/"; // redireciona para a página inicial após cadastro
 
     if (!nome || !nascimento || !email || !telefone || !genero || !senha) {
       alert("⚠️ Todos os campos são obrigatórios.");
@@ -73,21 +71,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch("/cadastrar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome, nascimento, email, telefone, genero, senha, redirectTo }),
+        body: JSON.stringify({ nome, nascimento, email, telefone, genero, senha }),
         credentials: "include"
       });
 
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.erro || "Erro no cadastro.");
 
-      alert("✅ Cadastro realizado com sucesso!");
-      window.location.href = "/"; // redireciona para página inicial
+      alert("✅ " + data.sucesso);
+      window.location.href = data.redirectTo || "/";
     } catch (err) {
       console.error("Erro no cadastro:", err);
       alert(err.message);
     }
   });
 });
-
-
