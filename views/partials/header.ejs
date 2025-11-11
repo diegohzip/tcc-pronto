@@ -1,6 +1,9 @@
 <header class="cabecalho">
   <div class="conteudo-cabecalho">
-    <div class="logo">Nexus Training</div>
+    <div class="logo">
+      <img src="/images/logo.png" alt="Logo Nexus Training" class="logo-img" />
+      <span>Nexus Training</span>
+    </div>
     <div id="areaUsuario">
       <% if (usuario) { %>
         <span id="abrirPerfil">👤 Meu Perfil</span>
@@ -11,6 +14,22 @@
     </div>
   </div>
 </header>
+
+<style>
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* espaço entre imagem e texto */
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: white;
+}
+
+.logo-img {
+  width: 40px; /* ajuste o tamanho conforme necessário */
+  height: auto;
+}
+</style>
 
 <!-- Pop-up do Perfil -->
 <div id="popupPerfil" class="popup-perfil">

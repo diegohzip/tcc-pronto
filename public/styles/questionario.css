@@ -20,7 +20,13 @@ body {
   padding: 0;
 }
 
+.logo {
+  text-shadow: #a00000 1px 1px 5px;
+}
 
+.logo img {
+  filter: drop-shadow(1px 1px 2px #a00000);
+}
 /* cabecalho */
 
 .cabecalho {
