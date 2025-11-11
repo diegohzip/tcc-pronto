@@ -441,7 +441,7 @@ button:hover {
   border: 1.5px solid #ccc;
   border-radius: 25px;
   padding: 8px 12px;
-  width: calc(100% - 24px);
+  width: calc(90% - 24px);
   margin-top: 10px;
   outline: none;
   background-image: url('https://img.icons8.com/ios-filled/20/000000/youtube-play.png');

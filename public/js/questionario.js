@@ -237,7 +237,8 @@ function mostrarDescricaoExercicio(exercicio) {
 
   descricaoTexto.innerHTML = `
     <strong>${exercicio}</strong><br><br>
-    ${descricao}<br><br>
+    <p><strong>Séries X Repetições:</strong> 4x10</p><br>
+    <p>${descricao}</p><br>
     <label>Tutorial em vídeo:</label><br>
     <input type="text" class="video-link" value="${videoLink}" readonly onclick="window.open('${videoLink}', '_blank')" />
   `;
