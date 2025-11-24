@@ -192,7 +192,7 @@ function exibirFicha(chave, ficha, dias) {
 
   // Botão de download
   const botaoDownload = document.createElement("a");
-  botaoDownload.href = `fichas/${chave}.pdf`;
+  botaoDownload.href = `/fichas/${chave}.pdf`;
   botaoDownload.download = `${chave}.pdf`;
   botaoDownload.textContent = "Baixar Ficha";
   botaoDownload.style.cssText = "display:inline-block;margin-top:20px;padding:10px 20px;background-color:#d00000;color:#fff;border-radius:5px;text-decoration:none;font-weight:bold;";

@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 // Configura view engine e pasta de views
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use("/fichas", express.static(path.join(__dirname, "public/fichas")));
 
 // Servir arquivos estáticos (CSS, JS, imagens)
 app.use(express.static(path.join(__dirname, 'public')));
